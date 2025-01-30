@@ -1,0 +1,134 @@
+sentry:
+  dsn: ''
+  environment: ''
+
+server:
+  port: 2333
+  address: 0.0.0.0
+
+metrics:
+  prometheus:
+    enabled: false
+    endpoint: /metrics
+
+lavalink:
+  server:
+    password: 'painfuego'
+    sources:
+      http: true
+      vimeo: true
+      local: false
+      twitch: true
+      youtube: false
+      bandcamp: true
+      soundcloud: true
+    filters:
+      volume: true
+      lowPass: true
+      karaoke: true
+      tremolo: true
+      vibrato: true
+      rotation: true
+      timescale: true
+      equalizer: true
+      channelMix: true
+      distortion: true
+    gc-warnings: true
+    useSeekGhosting: true
+    bufferDurationMs: 400
+    playerUpdateInterval: 5
+    opusEncodingQuality: 10
+    resamplingQuality: HIGH
+    youtubeSearchEnabled: true
+    frameBufferDurationMs: 5000
+    trackStuckThresholdMs: 10000
+    youtubePlaylistLoadLimit: 10
+    soundcloudSearchEnabled: true
+  plugins:
+    - dependency: dev.lavalink.youtube:youtube-plugin:1.3.0
+      repository: https://maven.lavalink.dev/releases
+    - dependency: com.dunctebot:skybot-lavalink-plugin:1.6.3
+      repository: https://maven.lavalink.dev/releases
+      snapshot: false
+    - dependency: com.github.topi314.lavasrc:lavasrc-plugin:4.1.1
+      repository: https://maven.lavalink.dev/releases
+      snapshot: false
+    - dependency: com.github.topi314.lavasearch:lavasearch-plugin:1.0.0
+      repository: https://maven.lavalink.dev/releases
+      snapshot: false
+    - dependency: dev.lavalink.youtube:youtube-plugin:1.2.0
+      snapshot: false
+  pluginsDir: './plugins'
+  defaultPluginRepository: 'https://maven.lavalink.dev/releases'
+  defaultPluginSnapshotRepository: 'https://maven.lavalink.dev/snapshots'
+
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    clients:
+      - WEB
+      - IOS
+      - MUSIC
+      - ANDROID_LITE
+      - MEDIA_CONNECT
+      - TVHTML5EMBEDDED
+      - ANDROID_TESTSUITE
+    TVHTML5EMBEDDED:
+      searching: false
+      videoLoading: false
+      playlistLoading: false
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+
+  dunctebot:
+    sources:
+      tts: true
+      tiktok: true
+      reddit: true
+      clypit: true
+      getyarn: true
+      pornhub: true
+      ocremix: true
+      mixcloud: true
+      soundgasm: true
+    ttsLanguage: en-AU
+
+  lavasrc:
+    sources:
+      deezer: true
+      youtube: true
+      spotify: true
+      flowerytts: true
+      applemusic: true
+      yandexmusic: true
+
+    flowerytts:
+      speed: 1
+      silence: 0
+      translate: false
+      audioFormat: mp3
+      voice: default voice
+
+    providers:
+      - ytsearch:"%ISRC%"
+      - ytsearch:%QUERY%
+
+    deezer:
+      masterDecryptionKey: g4el58wc0zvf9na1
+
+    spotify:
+      countryCode: US
+      albumLoadLimit: 6
+      playlistLoadLimit: 6
+      clientId: 500295ff7af14eab8867381183553638
+      clientSecret: 5c5696323ce54e18bffb79e02f1e8ebb
+
+    yandexmusic:
+      accessToken: 0c4181a7c2cf4521964a72ff57a34a07
+
+    applemusic:
+      countryCode: US
+      albumLoadLimit: 6
+      playlistLoadLimit: 6
+      mediaAPIToken: eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IldlYlBsYXlLaWQifQ.eyJpc3MiOiJBTVBXZWJQbGF5IiwiaWF0IjoxNzA2ODIyMTQ4LCJleHAiOjE3MTQwNzk3NDgsInJvb3RfaHR0cHNfb3JpZ2luIjpbImFwcGxlLmNvbSJdfQ.4e3JEeHEK8IJxsMhzWLEP1pBew5I06tnnWjfcuNTvJsyYHO-CCj2g9NDU9ehl2SKOqXiqNmlqV_ZdG9rNxztcA
