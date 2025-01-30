@@ -1,0 +1,50 @@
+/**
+ * @fuego v1.0.0
+ * @author painfuego (www.codes-for.fun)
+ * @copyright 2024 1sT - Services | CC BY-NC-SA 4.0
+ */
+
+import { Message } from 'discord.js';
+import { Context } from '../../interfaces/context.js';
+import { ExtendedClient } from '../../classes/client.js';
+
+export const createContext = async (client: ExtendedClient, message: Message) => {
+  if (!message.guild || !message.member || !message.channel || message.channel.isDMBased()) return;
+
+  const _mentions: Context['mentions'] = {
+    everyone: message.mentions.everyone,
+  };
+
+  if (message.mentions.users?.size) _mentions.users = message.mentions.users;
+  if (message.mentions.roles?.size) _mentions.roles = message.mentions.roles;
+  if (message.mentions.members?.size) _mentions.members = message.mentions.members;
+  if (message.mentions.channels?.size) _mentions.channels = message.mentions.channels;
+
+  const _attachments = message.attachments.size ? message.attachments : undefined;
+
+  const ctx: Context = {
+    id: message.id,
+    client: client,
+    message: message,
+    mentions: _mentions,
+    guild: message.guild,
+    member: message.member,
+    author: message.author,
+    channel: message.channel,
+    content: message.content,
+    guildId: message.guild.id,
+    attachments: _attachments,
+    channelId: message.channel.id,
+    react: async (e, c) => {
+      if (c) await message.reply(c);
+      return await message.react(e);
+    },
+    createdTimestamp: message.createdTimestamp,
+    reply: async (args) => await message.reply(args),
+    send: async (args) => await message.channel.send(args),
+  };
+
+  return ctx;
+};
+
+/**@codeStyle - https://google.github.io/styleguide/tsguide.html */
