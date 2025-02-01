@@ -25,8 +25,8 @@ export default class PlayerStart implements Event<typeof event> {
 
     const channel = client.channels.cache.get(player.textId);
 
-    if (!channel?.isTextBased()) return;
-
+    if (!channel?.isTextBased() || !('send' in channel)) return;
+    
     const playEmbed = await channel.send({
       embeds: [generatePlayEmbed(client, player)],
       components: [
