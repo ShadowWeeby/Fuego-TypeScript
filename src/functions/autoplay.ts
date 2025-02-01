@@ -29,9 +29,16 @@ export const autoplay = async (client: ExtendedClient, player: KazagumoPlayer) =
   const result = await player.search(query, {
     requester: client.user,
   });
+  
+  const channel = client.channels.cache.get(player.textId as string);
+  
+  if (!channel || !channel.isTextBased() || !('send' in channel)) {
+    await player.destroy();
+    return;
+  }
 
   if (!result.tracks.length) {
-    await (client.channels.cache.get(player.textId as string) as TextBasedChannel).send({
+    await channel.send({
       embeds: [
         client
           .embed()
