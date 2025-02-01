@@ -10,7 +10,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 export const deploySlashCommands = async (client) => {
     const slashCommands = [];
-    const rest = new REST().setToken(client.config.token);
+    const rest = new REST().setToken('token daal);
     for (const category of await readdir(resolve(__dirname, '../commands'))) {
         for (const file of await readdir(resolve(__dirname, '../commands', category))) {
             if (!file.endsWith('.js'))
