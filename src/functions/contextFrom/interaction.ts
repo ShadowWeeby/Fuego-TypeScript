@@ -85,7 +85,13 @@ export const createContext = async (client: ExtendedClient, interaction: Command
     createdTimestamp: interaction.createdTimestamp,
     reply: async (args) => await interaction.editReply(args),
     content: `${client.prefix}${interaction.commandName} ${content}`,
-    send: async (args) => await interaction.channel!.send(args),
+    send: async (args) => {
+      const channel = interaction.channel;
+      if (channel && 'send' in channel) {
+        return await channel.send(args);
+      }
+      throw new Error('The channel does not support sending messages.');
+    },
     react: async (emoji, content) => {
       const reply = await interaction.editReply({
         content: `${interaction.member} used the command : \`${interaction.commandName}\``,
