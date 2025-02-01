@@ -10,4 +10,4 @@ Fuego discord bot source code leaked by Cypher Team [ [terminix.py](https://disc
 # Make example.env file to .env
 
 
-Put bot token in - dist/index.js & dist/classes/client.js
+Put bot token in - dist/index.js & dist/classes/client.js &  dist/loaders.slashCmds.js
