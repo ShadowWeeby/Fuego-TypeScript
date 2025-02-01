@@ -61,9 +61,10 @@ export const zipper = async (zipPath: string) => {
 
   await archive.finalize();
 
-  await new Promise((resolve) => {
-    output.on('close', resolve);
+  await new Promise<void>((resolve) => {
+    output.on('close', () => resolve());
   });
+  
 
   return resolvedZipPath;
 };
