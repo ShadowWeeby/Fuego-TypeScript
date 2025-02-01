@@ -41,7 +41,13 @@ export const createContext = async (client: ExtendedClient, message: Message) =>
     },
     createdTimestamp: message.createdTimestamp,
     reply: async (args) => await message.reply(args),
-    send: async (args) => await message.channel.send(args),
+    send: async (args) => {
+      const channel = message.channel;
+      if (channel && 'send' in channel) {
+        return await channel.send(args);
+      }
+      throw new Error('The channel does not support sending messages.');
+    },
   };
 
   return ctx;
