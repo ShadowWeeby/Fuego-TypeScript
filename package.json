@@ -40,7 +40,6 @@
     "os-utils": "^0.0.14",
     "readline-sync": "^1.4.10",
     "shoukaku": "^4.0.1",
-    "typescript-eslint": "^7.14.1",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
